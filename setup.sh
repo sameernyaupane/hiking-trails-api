@@ -28,8 +28,8 @@ if [[ $1 == "" ]] || [[ $1 == "--only=hta" ]]; then
     # HTA: Storage permissions
     touch ${HTA_PATH}/storage/logs/nginx-error.log
     touch ${HTA_PATH}/storage/logs/nginx-access.log
-    sudo -- sh -c "chown $USER:www-data -R ${HTA_PATH}/storage/logs"
-    sudo -- sh -c "chmod g+w -R ${HTA_PATH}/storage/logs"
+    sudo -- sh -c "chown $USER:www-data -R ${HTA_PATH}/storage"
+    sudo -- sh -c "chmod g+w -R ${HTA_PATH}/storage"
 
     # HTA: Create environment files
     touch ${HTA_PATH}/.env
