@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use App\Models\Trail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Hash;
@@ -17,11 +18,6 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::post('/sanctum/token', function (Request $request) {
     $request->validate([
         'email' => 'required|email',
@@ -46,10 +42,21 @@ Route::post('/sanctum/token', function (Request $request) {
 
 Route::post('register', [RegisteredUserController::class, 'store']);
 
-Route::middleware('auth:sanctum')->get('/logout', function (Request $request) {
-    if($request->user()->currentAccessToken()->delete()) {
-        return response()->json(["success" => true]);
-    }
+Route::middleware('auth:sanctum')->group(function () {
 
-    return response()->json(["success" => false]);
+    Route::get('/logout', function (Request $request) {
+        if($request->user()->currentAccessToken()->delete()) {
+            return response()->json(["success" => true]);
+        }
+    
+        return response()->json(["success" => false]);
+    });
+
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
+    
+    Route::get('/trails', function () {
+        return Trail::all();
+    });
 });
