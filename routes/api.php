@@ -3,10 +3,14 @@
 use App\Models\User;
 use App\Models\Trail;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\GroupController;
+use App\Http\Controllers\TrailController;
 use Illuminate\Validation\ValidationException;
 use App\Http\Controllers\Auth\RegisteredUserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -55,8 +59,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
-    
-    Route::get('/trails', function () {
-        return Trail::all();
-    });
+
+    Route::resource('users', UsersController::class);
+    Route::resource('trails', TrailController::class);
+    Route::resource('groups', GroupController::class);
+
 });
