@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Group;
 use Illuminate\Http\Request;
 
 class GroupController extends Controller
@@ -13,17 +14,7 @@ class GroupController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return Group::all();
     }
 
     /**
@@ -34,7 +25,11 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return Group::create([
+            'name'        => $request->name,
+            'thumbnail'   => $request->thumbnail,
+            'description' => $request->description,
+        ]);
     }
 
     /**
@@ -49,17 +44,6 @@ class GroupController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -68,7 +52,12 @@ class GroupController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return Group::where('id', $id)
+        ->update([
+            'name'        => $request->name,
+            'thumbnail'   => $request->thumbnail,
+            'description' => $request->description,
+        ]);
     }
 
     /**
@@ -79,6 +68,6 @@ class GroupController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return Group::destroy($id);
     }
 }

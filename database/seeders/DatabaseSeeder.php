@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use App\Models\Trail;
+use App\Models\Group;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -50,8 +51,40 @@ class DatabaseSeeder extends Seeder
             ],
         ];
 
+        $groups = [
+            [
+                'name'        => 'Hikers Group',
+                'description' => "We are looking for members to take on Langtang Trek together.",
+                'thumbnail'   => ''
+            ],
+            [
+                'name'        => 'Nepal Hikers',
+                'description' => "Desc",
+                'thumbnail'   => ''
+            ],
+            [
+                'name'        => 'Hikes Team',
+                'description' => "Desc.",
+                'thumbnail'   => ''
+            ],
+            [
+                'name'        => 'Elevation Hikers',
+                'description' => "Desc",
+                'thumbnail'   => ''
+            ],
+            [
+                'name'        => 'Mountain Adventurers',
+                'description' => "Desc",
+                'thumbnail'   => ''
+            ],
+        ];
+
         foreach($trails as $trail) {
             Trail::factory()->create($trail);
+        }
+
+        foreach($groups as $group) {
+            Group::factory()->create($group);
         }
     }
 }

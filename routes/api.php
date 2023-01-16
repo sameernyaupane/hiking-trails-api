@@ -60,8 +60,24 @@ Route::middleware('auth:sanctum')->group(function () {
         return $request->user();
     });
 
-    Route::resource('users', UsersController::class);
-    Route::resource('trails', TrailController::class);
-    Route::resource('groups', GroupController::class);
+    Route::apiResources([
+        'users'  => UserController::class,
+        'trails' => TrailController::class,
+        'groups' => GroupController::class,
+    ]);
 
+    Route::get('/recommend-trail', function (Request $request) {
+        $objects = [
+            'The Matrix' => ['Action', 'Sci-Fi'],
+            'Lord of The Rings' => ['Adventure', 'Drama', 'Fantasy'],
+            'Batman' => ['Action', 'Drama', 'Crime'],
+            'Fight Club' => ['Drama'],
+            'Pulp Fiction' => ['Drama', 'Crime'],
+            'Django' => ['Drama', 'Western'],
+        ];
+        
+        $user = ['Drama', 'Crime'];
+        
+        return $engine->getRecommendation($user, $objects);
+    });
 });

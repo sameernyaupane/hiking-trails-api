@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Trail;
 use Illuminate\Http\Request;
 
 class TrailController extends Controller
@@ -13,17 +14,7 @@ class TrailController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return Trail::all();
     }
 
     /**
@@ -34,7 +25,11 @@ class TrailController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return Trail::create([
+            'title'       => $request->title,
+            'thumbnail'   => $request->thumbnail,
+            'description' => $request->description,
+        ]);
     }
 
     /**
@@ -49,17 +44,6 @@ class TrailController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -68,7 +52,12 @@ class TrailController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return Trail::where('id', $id)
+        ->update([
+            'title'       => $request->title,
+            'thumbnail'   => $request->thumbnail,
+            'description' => $request->description,
+        ]);
     }
 
     /**
@@ -79,6 +68,6 @@ class TrailController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return Trail::destroy($id);
     }
 }
