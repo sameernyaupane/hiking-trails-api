@@ -5,6 +5,7 @@ use App\Models\Trail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
+use App\Services\RecommendationService;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\TrailController;
@@ -66,18 +67,17 @@ Route::middleware('auth:sanctum')->group(function () {
         'groups' => GroupController::class,
     ]);
 
-    Route::get('/recommend-trail', function (Request $request) {
+    Route::get('/trail-recommendation', function (Request $request, RecommendationService $recommendationService) {
         $objects = [
-            'The Matrix' => ['Action', 'Sci-Fi'],
-            'Lord of The Rings' => ['Adventure', 'Drama', 'Fantasy'],
-            'Batman' => ['Action', 'Drama', 'Crime'],
-            'Fight Club' => ['Drama'],
-            'Pulp Fiction' => ['Drama', 'Crime'],
-            'Django' => ['Drama', 'Western'],
+            'Shivapuri Bishnudwar Hike' => ['Normal', 'Medium', 'Short'],
+            'Phulchowki Trail Hike'     => ['Hard', 'High', 'Long'],
+            'Champadevi Trail Hike'     => ['Easy', 'Medium', 'Medium'],
+            'Lakuri Bhanjyang Hike'     => ['Hard', 'High', 'Long'],
+            'Chisapani Hiking Trail'    => ['Normal', 'Medium', 'Long'],
         ];
         
-        $user = ['Drama', 'Crime'];
+        $user = ['Normal', 'Medium', 'Long'];
         
-        return $engine->getRecommendation($user, $objects);
+        return $recommendationService->getRecommendation($user, $objects);
     });
 });

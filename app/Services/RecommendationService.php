@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Services;
+
 class RecommendationService {
     const USER_ID = '__USER__';
 	protected $data;
@@ -38,7 +40,7 @@ class RecommendationService {
 
 		foreach ($objects as $object => $tags) {
 			foreach ($tags as $tag) {
-				$result[$object][$tag] = 1.0	;
+				$result[$object][$tag] = 1.0;
 			}
 		}
 
@@ -71,7 +73,6 @@ class RecommendationService {
         return  $sum / sqrt($alpha) / sqrt($beta);     
     }
     
-    
     public function matchItems($preferences, $person)
     {
         $score = array();
@@ -91,7 +92,6 @@ class RecommendationService {
         return $score;
     
     }
-    
     
     public function transformPreferences($preferences)
     {
@@ -149,9 +149,9 @@ class RecommendationService {
             $ranks[$key] = $value / $simSums[$key];
         }
         
-    array_multisort($ranks, SORT_DESC);    
-    return $ranks;
-        
+        array_multisort($ranks, SORT_DESC);    
+
+        return $ranks;
     }
    
 }
