@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Trail extends Model
+class TrailDetail extends Model
 {
     use HasFactory;
 
@@ -15,13 +15,11 @@ class Trail extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'title',
-        'description',
-        'thumbnail',
+        'difficulty',
+        'elevation',
+        'elevation_rating',
+        'distance',
+        'distance_rating',
+        'estimated_time',
     ];
-
-    public function details()
-    {
-        return $this->hasOne(TrailDetail::class);
-    }
 }

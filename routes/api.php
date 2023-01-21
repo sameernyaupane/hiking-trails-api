@@ -11,7 +11,7 @@ use App\Http\Controllers\GroupController;
 use App\Http\Controllers\TrailController;
 use Illuminate\Validation\ValidationException;
 use App\Http\Controllers\Auth\RegisteredUserController;
-
+use App\Http\Controllers\RecommendationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,17 +67,5 @@ Route::middleware('auth:sanctum')->group(function () {
         'groups' => GroupController::class,
     ]);
 
-    Route::get('/trail-recommendation', function (Request $request, RecommendationService $recommendationService) {
-        $objects = [
-            'Shivapuri Bishnudwar Hike' => ['Normal', 'Medium', 'Short'],
-            'Phulchowki Trail Hike'     => ['Hard', 'High', 'Long'],
-            'Champadevi Trail Hike'     => ['Easy', 'Medium', 'Medium'],
-            'Lakuri Bhanjyang Hike'     => ['Hard', 'High', 'Long'],
-            'Chisapani Hiking Trail'    => ['Normal', 'Medium', 'Long'],
-        ];
-        
-        $user = ['Normal', 'Medium', 'Long'];
-        
-        return $recommendationService->getRecommendation($user, $objects);
-    });
+    Route::get('/trail-recommendation', [RecommendationController::class, 'index']);
 });

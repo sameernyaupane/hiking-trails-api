@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -20,7 +20,10 @@ return new class extends Migration
             $table->string('elevation_rating');
             $table->string('distance');
             $table->string('distance_rating');
-            $table->integer('star_rating');
+            $table->string('estimated_time');
+
+            $table->foreignId('trail_id')->constrained();
+
             $table->timestamps();
         });
     }
