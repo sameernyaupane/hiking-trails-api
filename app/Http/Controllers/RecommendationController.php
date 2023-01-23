@@ -30,14 +30,14 @@ class RecommendationController extends Controller
         
         $recommendations = $recommendationService->getRecommendation($user, $data);
 
-        return $recommendations;
+        //return $recommendations;
 
         $grouped = $trails->groupBy('id');
 
         $finalArray = [];
 
         foreach($recommendations as $key => $recommendation) {
-            array_push($finalArray, $grouped[substr($key, 3)]);
+            array_push($finalArray, $grouped[substr($key, 3)][0]);
         }
 
         return $finalArray;

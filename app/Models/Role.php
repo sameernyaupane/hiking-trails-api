@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Group extends Model
+class Role extends Model
 {
     use HasFactory;
 
@@ -16,8 +16,5 @@ class Group extends Model
      */
     protected $fillable = [
         'name',
-        'description',
-        'thumbnail',
-        'user_id'
     ];
 }

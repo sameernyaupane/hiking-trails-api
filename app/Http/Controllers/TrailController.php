@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Trail;
+use App\Models\StarRating;
 use Illuminate\Http\Request;
 
 class TrailController extends Controller
@@ -14,7 +15,18 @@ class TrailController extends Controller
      */
     public function index()
     {
-        return Trail::all();
+        $trails = Trail::with('details')->get();
+
+        foreach($trails as $trail) {
+            $rating = StarRating::where([
+                'trail_id' => $trail->id,
+                'user_id'  => auth()->user()->id,
+            ])->get();
+
+            $trail->starRating = $rating;
+        }
+
+        return $trails;
     }
 
     /**
@@ -52,8 +64,7 @@ class TrailController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return Trail::where('id', $id)
-        ->update([
+        return Trail::where('id', $id)->update([
             'title'       => $request->title,
             'thumbnail'   => $request->thumbnail,
             'description' => $request->description,
@@ -69,5 +80,23 @@ class TrailController extends Controller
     public function destroy($id)
     {
         return Trail::destroy($id);
+    }
+
+    public function rateTrail(Request $request, $id)
+    {
+        $starRating = StarRating::where('id', $id)->get();
+
+        if($starRating) {
+            $starRating->rating = $request->rating;
+            $starRating->save();
+        } else {
+            StarRating::create([
+                'trail_id' => $id,
+                'user_id'  => auth()->user()->id,
+                'rating'   => $request->rating,
+            ]);
+        }
+
+        return response()->json('Trail rated.');
     }
 }

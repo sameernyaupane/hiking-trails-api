@@ -21,5 +21,11 @@ class TrailDetail extends Model
         'distance',
         'distance_rating',
         'estimated_time',
+        'accomodation1',
+        'accomodation1_cost',
+        'accomodation2',
+        'accomodation2_cost',
+        'accomodation3',
+        'accomodation3_cost',
     ];
 }

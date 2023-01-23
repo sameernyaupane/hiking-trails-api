@@ -1,17 +1,15 @@
 <?php
 
 use App\Models\User;
-use App\Models\Trail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
-use App\Services\RecommendationService;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\TrailController;
 use Illuminate\Validation\ValidationException;
-use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\RecommendationController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,5 +65,6 @@ Route::middleware('auth:sanctum')->group(function () {
         'groups' => GroupController::class,
     ]);
 
-    Route::get('/trail-recommendation', [RecommendationController::class, 'index']);
+    Route::get('/recommendations', [RecommendationController::class, 'index']);
+    Route::get('/rate-trail/{id}', [RecommendationController::class, 'index']);
 });

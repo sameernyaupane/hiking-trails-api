@@ -18,10 +18,16 @@ class Trail extends Model
         'title',
         'description',
         'thumbnail',
+        'user_id'
     ];
 
     public function details()
     {
         return $this->hasOne(TrailDetail::class);
+    }
+
+    public function starRating()
+    {
+        return $this->hasMany(StarRating::class);
     }
 }

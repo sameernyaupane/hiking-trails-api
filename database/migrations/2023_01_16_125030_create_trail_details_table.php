@@ -21,7 +21,14 @@ return new class extends Migration
             $table->string('distance');
             $table->string('distance_rating');
             $table->string('estimated_time');
-
+            $table->string('accomodation1');
+            $table->string('accomodation1_cost');
+            $table->string('accomodation2');
+            $table->string('accomodation2_cost');
+            $table->string('accomodation3');
+            $table->string('accomodation3_cost');
+            $table->text('map_url');
+            
             $table->foreignId('trail_id')->constrained();
 
             $table->timestamps();
