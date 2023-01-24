@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Group extends Model
+class GroupUser extends Model
 {
     use HasFactory;
 
@@ -15,14 +15,9 @@ class Group extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'description',
-        'thumbnail',
-        'user_id'
+        'user_id',
+        'group_id',
     ];
 
-    public function members()
-    {
-        return $this->hasMany(GroupUser::class);
-    }
+    protected $table = 'group_user';
 }

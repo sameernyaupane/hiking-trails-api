@@ -66,5 +66,7 @@ Route::middleware('auth:sanctum')->group(function () {
     ]);
 
     Route::get('/recommendations', [RecommendationController::class, 'index']);
-    Route::get('/rate-trail/{id}', [RecommendationController::class, 'index']);
+    Route::post('/rate-trail/{id}', [TrailController::class, 'rateTrail']);
+    Route::post('/join-group/{id}', [GroupController::class, 'join']);
+    Route::post('/leave-group/{id}', [GroupController::class, 'leave']);
 });

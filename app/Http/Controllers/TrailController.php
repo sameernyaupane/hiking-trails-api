@@ -21,7 +21,7 @@ class TrailController extends Controller
             $rating = StarRating::where([
                 'trail_id' => $trail->id,
                 'user_id'  => auth()->user()->id,
-            ])->get();
+            ])->pluck('rating');
 
             $trail->starRating = $rating;
         }
@@ -84,7 +84,7 @@ class TrailController extends Controller
 
     public function rateTrail(Request $request, $id)
     {
-        $starRating = StarRating::where('id', $id)->get();
+        $starRating = StarRating::where(['trail_id' => $id, 'user_id' => auth()->user()->id])->first();
 
         if($starRating) {
             $starRating->rating = $request->rating;
