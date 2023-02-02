@@ -40,6 +40,12 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'title'       => 'required|string',
+            'thumbnail'   => 'string',
+            'description' => 'required|string',
+        ]);
+
         return Group::create([
             'name'        => $request->name,
             'thumbnail'   => $request->thumbnail,
@@ -67,6 +73,12 @@ class GroupController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'title'       => 'required|string',
+            'thumbnail'   => 'string',
+            'description' => 'required|string',
+        ]);
+        
         return Group::where('id', $id)
         ->update([
             'name'        => $request->name,

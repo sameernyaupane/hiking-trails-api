@@ -37,6 +37,12 @@ class TrailController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'title'       => 'required|string',
+            'thumbnail'   => 'string',
+            'description' => 'required|string',
+        ]);
+
         return Trail::create([
             'title'       => $request->title,
             'thumbnail'   => $request->thumbnail,
@@ -64,6 +70,12 @@ class TrailController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'title'       => 'required|string',
+            'thumbnail'   => 'string',
+            'description' => 'required|string',
+        ]);
+
         return Trail::where('id', $id)->update([
             'title'       => $request->title,
             'thumbnail'   => $request->thumbnail,
