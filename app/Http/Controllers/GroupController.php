@@ -41,8 +41,8 @@ class GroupController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title'       => 'required|string',
-            'thumbnail'   => 'string',
+            'name'        => 'required|string',
+            'thumbnail'   => 'nullable|string',
             'description' => 'required|string',
         ]);
 
@@ -50,6 +50,7 @@ class GroupController extends Controller
             'name'        => $request->name,
             'thumbnail'   => $request->thumbnail,
             'description' => $request->description,
+            'user_id'     => auth()->user()->id,
         ]);
     }
 
@@ -74,7 +75,7 @@ class GroupController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'title'       => 'required|string',
+            'name'        => 'required|string',
             'thumbnail'   => 'string',
             'description' => 'required|string',
         ]);

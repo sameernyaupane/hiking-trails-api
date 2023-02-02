@@ -14,6 +14,12 @@ class RecommendationController extends Controller
      */
     public function index(RecommendationService $recommendationService)
     {
+        $userDetails = auth()->user()->details;
+
+        if(!$userDetails) {
+            return [];
+        }
+
         $trails = Trail::with('details')->get();
 
         $data = [];
@@ -26,7 +32,7 @@ class RecommendationController extends Controller
             ];
         }
         
-        $user = ['Normal', 'Medium', 'Long'];
+        $user = [$userDetails->difficulty, $userDetails->elevation_rating, $userDetails->distance_rating];
         
         $recommendations = $recommendationService->getRecommendation($user, $data);
 

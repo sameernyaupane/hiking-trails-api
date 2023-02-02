@@ -18,5 +18,6 @@ class UserDetail extends Model
         'difficulty',
         'elevation_rating',
         'distance_rating',
+        'user_id'
     ];
 }

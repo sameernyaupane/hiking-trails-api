@@ -69,4 +69,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/rate-trail/{id}', [TrailController::class, 'rateTrail']);
     Route::post('/join-group/{id}', [GroupController::class, 'join']);
     Route::post('/leave-group/{id}', [GroupController::class, 'leave']);
+    Route::get('/profile', [UserController::class, 'profile']);
+    Route::put('/profile', [UserController::class, 'updateProfile']);
 });
