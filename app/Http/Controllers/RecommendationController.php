@@ -20,7 +20,7 @@ class RecommendationController extends Controller
             return [];
         }
 
-        $trails = Trail::with('details')->get();
+        $trails = Trail::has('details')->get();
 
         $data = [];
 

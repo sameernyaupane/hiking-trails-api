@@ -76,8 +76,8 @@ class GroupController extends Controller
     {
         $request->validate([
             'name'        => 'required|string',
-            'thumbnail'   => 'string',
             'description' => 'required|string',
+            'thumbnail'   => 'nullable|string',
         ]);
         
         return Group::where('id', $id)

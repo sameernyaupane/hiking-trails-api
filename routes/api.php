@@ -23,8 +23,8 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 */
 Route::post('/sanctum/token', function (Request $request) {
     $request->validate([
-        'email' => 'required|email',
-        'password' => 'required',
+        'email'       => 'required|email',
+        'password'    => 'required',
         'device_name' => 'required',
     ]);
  
@@ -36,11 +36,13 @@ Route::post('/sanctum/token', function (Request $request) {
         ]);
     }
 
-    $name = $user->name;
+    $userId = $user->id;
+    $name   = $user->name;
+    $roles  = $user->roles()->pluck('name');
 
     $token = $user->createToken($request->device_name)->plainTextToken;
  
-    return compact('name', 'token');
+    return compact('name', 'token', 'userId', 'roles');
 });
 
 Route::post('register', [RegisteredUserController::class, 'store']);

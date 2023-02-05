@@ -39,12 +39,13 @@ class TrailController extends Controller
     {
         $request->validate([
             'title'       => 'required|string',
-            'thumbnail'   => 'string',
             'description' => 'required|string',
+            'thumbnail'   => 'nullable|string',
         ]);
 
         return Trail::create([
             'title'       => $request->title,
+            'user_id'     => auth()->user()->id,
             'thumbnail'   => $request->thumbnail,
             'description' => $request->description,
         ]);
@@ -72,8 +73,8 @@ class TrailController extends Controller
     {
         $request->validate([
             'title'       => 'required|string',
-            'thumbnail'   => 'string',
             'description' => 'required|string',
+            'thumbnail'   => 'nullable|string',
         ]);
 
         return Trail::where('id', $id)->update([
