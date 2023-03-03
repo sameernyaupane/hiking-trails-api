@@ -92,6 +92,12 @@ class TrailController extends Controller
      */
     public function destroy($id)
     {
+        $starRatings = StarRating::where(['trail_id' => $id])->get();
+
+        foreach($starRatings as $starRating) {
+            $starRating->delete();
+        }
+
         return Trail::destroy($id);
     }
 
